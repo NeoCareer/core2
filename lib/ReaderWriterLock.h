@@ -1,10 +1,8 @@
 #pragma once
 
-#include <chrono>
-#include <condition_variable>
-#include <mutex>
-#include <stdexcept>
-#include <thread>
+#include "lib/All.h"
+
+namespace core {
 
 class ReaderWriterLock {
 public:
@@ -25,7 +23,8 @@ private:
   const ReaderWriterLockMode mode;
 
 public:
-  explicit ReaderWriterLock(const ReaderWriterLockMode mode_ = ReaderWriterLockMode::BALANCED)
+  explicit ReaderWriterLock(
+      const ReaderWriterLockMode mode_ = ReaderWriterLockMode::BALANCED)
       : mode(mode_) {}
 
   void readerLock() {
@@ -115,3 +114,5 @@ public:
     }
   }
 };
+
+} // namespace core

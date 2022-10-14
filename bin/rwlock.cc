@@ -1,37 +1,8 @@
-#include "lib/ReaderWriterLock.h"
-#include <array>
-#include <chrono>
-#include <cmath>
-#include <ctime>
-#include <iomanip>
-#include <iostream>
-#include <map>
-#include <math.h>
-#include <queue>
-#include <random>
-#include <shared_mutex>
-#include <sys/time.h>
-#include <thread>
-#include <time.h>
-#include <vector>
+#include "lib/Lib.h"
 
 using namespace std;
 using namespace std::chrono;
-
-long long millsecond() {
-  auto millisecSinceEpoch =
-      duration_cast<milliseconds>(system_clock::now().time_since_epoch())
-          .count();
-  return millisecSinceEpoch;
-}
-
-static float millDuration() {
-  static long long previousTime = 0;
-
-  float retVal = (static_cast<float>(millsecond() - previousTime)) / 1000;
-  previousTime = millsecond();
-  return retVal;
-}
+using namespace core;
 
 constexpr const unsigned SIZE = 1 << 10;
 
@@ -197,24 +168,24 @@ void benchmark(Matrix &matrix, Producer &&producer, Consumer &&consumer) {
 }
 
 int main() {
-  millDuration();
+  millsecondDuration();
 
   Matrix matrix;
 
   benchmark(matrix, readFirstProducer, readFirstConsumer);
-  cout << "Read-first lock: " << millDuration() << endl;
+  cout << "Read-first lock: " << millsecondDuration() << endl;
 
   benchmark(matrix, writeFirstProducer, writeFirstConsumer);
-  cout << "Write-first lock: " << millDuration() << endl;
+  cout << "Write-first lock: " << millsecondDuration() << endl;
 
   benchmark(matrix, balancedProducer, balancedConsumer);
-  cout << "Balanced lock: " << millDuration() << endl;
+  cout << "Balanced lock: " << millsecondDuration() << endl;
 
   benchmark(matrix, regularProducer, regularConsumer);
-  cout << "Regular lock: " << millDuration() << endl;
+  cout << "Regular lock: " << millsecondDuration() << endl;
 
   benchmark(matrix, regularSharedProducer, regularSharedConsumer);
-  cout << "Regular shared lock: " << millDuration() << endl;
+  cout << "Regular shared lock: " << millsecondDuration() << endl;
 
   return 0;
 }

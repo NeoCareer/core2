@@ -7,3 +7,27 @@ cc_binary(
         "//lib:corelib",
     ],
 )
+
+cc_binary(
+    name = "shm",
+    srcs = ["shm.cc"],
+    deps = [
+        "//lib:corelib",
+    ],
+)
+
+cc_binary(
+    name = "vector",
+    srcs = ["vector.cc"],
+    deps = [
+        "//lib:corelib",
+    ],
+)
+
+cc_binary(
+    name = "hashmap",
+    srcs = ["hashmap.cc"],
+    deps = [
+        "//lib:corelib",
+    ],
+)
