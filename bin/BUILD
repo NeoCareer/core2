@@ -31,3 +31,19 @@ cc_binary(
         "//lib:corelib",
     ],
 )
+
+cc_binary(
+    name = "forward",
+    srcs = ["forward.cc"],
+    deps = [
+        "//lib:corelib",
+    ],
+)
+
+cc_binary(
+    name = "async",
+    srcs = ["async.cc"],
+    deps = [
+        "//lib:corelib",
+    ],
+)
