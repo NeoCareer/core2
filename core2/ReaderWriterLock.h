@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 class ReaderWriterLock {
 public:
@@ -115,4 +115,4 @@ public:
   }
 };
 
-} // namespace core
+} // namespace core2

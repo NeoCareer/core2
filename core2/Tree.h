@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 template <typename Key, typename Value> class AVLTree {
   struct AVLTreeNode {
@@ -11,11 +11,11 @@ template <typename Key, typename Value> class AVLTree {
     AVLTreeNode *left, *right;
 
     template <typename T_>
-    AVLTreeNode(T_ &&value_)
+    AVLTreeNode(T_&& value_)
         : value(std::forward<T_>(value_)), left(nullptr), right(nullptr) {}
   };
 
-  AVLTreeNode *root = nullptr;
+  AVLTreeNode* root = nullptr;
 
   AVLTree() {
     std::map<int, int> a;
@@ -23,4 +23,4 @@ template <typename Key, typename Value> class AVLTree {
   }
 };
 
-} // namespace core
+} // namespace core2

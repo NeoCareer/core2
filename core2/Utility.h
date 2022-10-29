@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 using namespace std::chrono;
 
@@ -23,13 +23,13 @@ float millsecondDuration() {
 }
 
 template <typename T>
-inline typename std::remove_reference_t<T> &&move(T &&value) {
-  using ReturnType = typename std::remove_reference_t<T> &&;
+inline typename std::remove_reference_t<T>&& move(T&& value) {
+  using ReturnType = typename std::remove_reference_t<T>&&;
   return static_cast<ReturnType>(value);
 }
 
-template <typename T> inline T &&forward(std::remove_reference_t<T> &value) {
-  return static_cast<T &&>(value);
+template <typename T> inline T&& forward(std::remove_reference_t<T>& value) {
+  return static_cast<T&&>(value);
 }
 
 template <typename IntegralType = size_t>
@@ -43,4 +43,4 @@ constexpr inline IntegralType nextPowerOf2(IntegralType integral) {
 
 using byte_t = unsigned char;
 
-} // namespace core
+} // namespace core2

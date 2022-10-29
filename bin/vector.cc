@@ -1,6 +1,6 @@
-#include "lib/Lib.h"
+#include "core2/Core2.h"
 
-using namespace core;
+using namespace core2;
 using namespace std;
 
 constexpr const size_t SIZE = 1 << 24;

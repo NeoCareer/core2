@@ -1,14 +1,14 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 template <typename T, typename Allocator = std::allocator<T>> class Stack {
 private:
   struct Node {
     T value;
-    Node *next = nullptr;
+    Node* next = nullptr;
 
     template <typename T_>
     Node(T_&& value_) : value(std::forward<T_>(value_)) {}
@@ -20,16 +20,17 @@ private:
   NodeAllocator nodeAllocator;
   using NodeAllocatorTraits = std::allocator_traits<NodeAllocator>;
 
-  std::atomic<Node *> head;
+  std::atomic<Node*> head;
 
 public:
   Stack() : head(nullptr) {}
 
-  template <typename T_> void push(T_ &&value) {
-    Node *node = nodeAllocator.allocate(1);
-    NodeAllocatorTraits::construct(nodeAllocator, node, std::forward<T_>(value));
+  template <typename T_> void push(T_&& value) {
+    Node* node = nodeAllocator.allocate(1);
+    NodeAllocatorTraits::construct(nodeAllocator, node,
+                                   std::forward<T_>(value));
 
-    Node *currentHead;
+    Node* currentHead;
 
     do {
       currentHead = head;
@@ -39,12 +40,12 @@ public:
 
   T&& pop() {
     for (;;) {
-      Node *currentHead = head;
+      Node* currentHead = head;
       if (currentHead == nullptr) {
         continue;
       }
 
-      Node *newHead = currentHead->next;
+      Node* newHead = currentHead->next;
 
       if (head.compare_exchange_weak(currentHead, newHead)) {
         T value = std::move(currentHead->value);
@@ -58,4 +59,4 @@ public:
   }
 };
 
-} // namespace core
+} // namespace core2

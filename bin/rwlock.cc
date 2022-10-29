@@ -1,8 +1,8 @@
-#include "lib/Lib.h"
+#include "core2/Core2.h"
 
 using namespace std;
 using namespace std::chrono;
-using namespace core;
+using namespace core2;
 
 constexpr const unsigned SIZE = 1 << 10;
 
@@ -21,7 +21,7 @@ static unsigned randInt() {
 
 constexpr const unsigned MOD = 1000000007;
 
-void generate(Matrix &matrix) {
+void generate(Matrix& matrix) {
   matrix.checkSum = 0;
 
   for (unsigned i = 0; i < SIZE; ++i) {
@@ -30,7 +30,7 @@ void generate(Matrix &matrix) {
   }
 }
 
-bool verify(const Matrix &matrix) {
+bool verify(const Matrix& matrix) {
   unsigned checkSum = 0;
   for (const unsigned value : matrix.data) {
     checkSum = (checkSum + value) % MOD;
@@ -39,8 +39,10 @@ bool verify(const Matrix &matrix) {
   return matrix.checkSum == checkSum;
 }
 
-ReaderWriterLock readFirstLock(ReaderWriterLock::ReaderWriterLockMode::READER_FIRST);
-ReaderWriterLock writeFirstLock(ReaderWriterLock::ReaderWriterLockMode::WRITER_FIRST);
+ReaderWriterLock
+    readFirstLock(ReaderWriterLock::ReaderWriterLockMode::READER_FIRST);
+ReaderWriterLock
+    writeFirstLock(ReaderWriterLock::ReaderWriterLockMode::WRITER_FIRST);
 ReaderWriterLock balancedLock(ReaderWriterLock::ReaderWriterLockMode::BALANCED);
 std::mutex regularLock;
 std::shared_mutex regularSharedLock;
@@ -49,7 +51,7 @@ constexpr const unsigned STEP = 1 << 6;
 constexpr const unsigned WRITERS = 1 << 4;
 constexpr const unsigned READERS = 1 << 10;
 
-void readFirstProducer(Matrix &matrix) {
+void readFirstProducer(Matrix& matrix) {
   for (unsigned i = 0; i < STEP; ++i) {
     readFirstLock.writerLock();
     generate(matrix);
@@ -57,7 +59,7 @@ void readFirstProducer(Matrix &matrix) {
   }
 }
 
-void readFirstConsumer(const Matrix &matrix) {
+void readFirstConsumer(const Matrix& matrix) {
   for (unsigned i = 0; i < STEP; ++i) {
     readFirstLock.readerLock();
     if (!verify(matrix)) {
@@ -76,7 +78,7 @@ void writeFirstProducer(Matrix& matrix) {
   }
 }
 
-void writeFirstConsumer(const Matrix &matrix) {
+void writeFirstConsumer(const Matrix& matrix) {
   for (unsigned i = 0; i < STEP; ++i) {
     writeFirstLock.readerLock();
     if (!verify(matrix)) {
@@ -95,7 +97,7 @@ void balancedProducer(Matrix& matrix) {
   }
 }
 
-void balancedConsumer(const Matrix &matrix) {
+void balancedConsumer(const Matrix& matrix) {
   for (unsigned i = 0; i < STEP; ++i) {
     balancedLock.readerLock();
     if (!verify(matrix)) {
@@ -114,7 +116,7 @@ void regularProducer(Matrix& matrix) {
   }
 }
 
-void regularConsumer(const Matrix &matrix) {
+void regularConsumer(const Matrix& matrix) {
   for (unsigned i = 0; i < STEP; ++i) {
     regularLock.lock();
     if (!verify(matrix)) {
@@ -133,7 +135,7 @@ void regularSharedProducer(Matrix& matrix) {
   }
 }
 
-void regularSharedConsumer(const Matrix &matrix) {
+void regularSharedConsumer(const Matrix& matrix) {
   for (unsigned i = 0; i < STEP; ++i) {
     regularSharedLock.lock_shared();
     if (!verify(matrix)) {
@@ -144,8 +146,8 @@ void regularSharedConsumer(const Matrix &matrix) {
   }
 }
 
-void waitThreads(vector<thread> &threads) {
-  for (auto &thread : threads) {
+void waitThreads(vector<thread>& threads) {
+  for (auto& thread : threads) {
     if (thread.joinable()) {
       thread.join();
     }
@@ -153,7 +155,7 @@ void waitThreads(vector<thread> &threads) {
 }
 
 template <typename Producer, typename Consumer>
-void benchmark(Matrix &matrix, Producer &&producer, Consumer &&consumer) {
+void benchmark(Matrix& matrix, Producer&& producer, Consumer&& consumer) {
   vector<thread> threads;
 
   for (unsigned i = 0; i < WRITERS; ++i) {

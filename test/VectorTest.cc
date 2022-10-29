@@ -1,4 +1,4 @@
-#include "lib/Lib.h"
+#include "core2/Core2.h"
 #include <gtest/gtest.h>
 
 namespace {
@@ -9,17 +9,17 @@ struct NonCopyable {
   unsigned value;
   NonCopyable(unsigned value_) : value(value_) {}
 
-  NonCopyable &operator[](const NonCopyable &rhs) = delete;
+  NonCopyable& operator[](const NonCopyable& rhs) = delete;
 };
 
 TEST(VectorTest, EmptyVector) {
-  core::Vector<unsigned> emptyVector;
+  core2::Vector<unsigned> emptyVector;
   ASSERT_EQ(0, emptyVector.getSize());
   ASSERT_TRUE(emptyVector.isEmpty());
 }
 
 TEST(VectorTest, PushBack) {
-  core::Vector<unsigned> vector;
+  core2::Vector<unsigned> vector;
 
   for (size_t i = 0; i < SIZE; ++i) {
     vector.pushBack(i);
@@ -33,7 +33,7 @@ TEST(VectorTest, PushBack) {
 }
 
 TEST(VectorTest, EmplaceBack) {
-  core::Vector<unsigned> vector;
+  core2::Vector<unsigned> vector;
 
   for (size_t i = 0; i < SIZE; ++i) {
     vector.emplaceBack(i);
@@ -47,7 +47,7 @@ TEST(VectorTest, EmplaceBack) {
 }
 
 TEST(VectorTest, PopBack) {
-  core::Vector<unsigned> vector;
+  core2::Vector<unsigned> vector;
 
   for (size_t i = 0; i < SIZE; ++i) {
     vector.emplaceBack(i);
@@ -62,7 +62,7 @@ TEST(VectorTest, PopBack) {
 }
 
 TEST(VectorTest, NonCopyable) {
-  core::Vector<NonCopyable> vector;
+  core2::Vector<NonCopyable> vector;
 
   for (size_t i = 0; i < SIZE; ++i) {
     vector.emplaceBack(i);

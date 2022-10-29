@@ -1,4 +1,4 @@
-#include "lib/Lib.h"
+#include "core2/Core2.h"
 #include <gtest/gtest.h>
 
 namespace {
@@ -7,7 +7,7 @@ constexpr const size_t SIZE = 1 << 6;
 constexpr const size_t THREAD_COUNT = 1 << 6;
 
 TEST(SpinLockTest, SimpleSpinLockCorrectness) {
-  core::SpinLock lock;
+  core2::SpinLock lock;
 
   size_t count = 0;
 
@@ -25,7 +25,7 @@ TEST(SpinLockTest, SimpleSpinLockCorrectness) {
     threads.emplace_back(incrementation);
   }
 
-  for (auto &thread : threads) {
+  for (auto& thread : threads) {
     thread.join();
   }
 

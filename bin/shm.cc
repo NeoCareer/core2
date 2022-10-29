@@ -1,4 +1,4 @@
-#include "lib/Lib.h"
+#include "core2/Core2.h"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ void createSharedMemory(const char* const shmName) {
 
   ftruncate(memId, SIZE);
 
-  void *memory =
+  void* memory =
       mmap(nullptr, SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, memId, 0);
 
   close(memId);
@@ -36,8 +36,7 @@ void openSharedMemory(const char* const shmName) {
     exit(1);
   }
 
-  void *memory =
-      mmap(nullptr, SIZE, PROT_READ, MAP_SHARED, memId, 0);
+  void* memory = mmap(nullptr, SIZE, PROT_READ, MAP_SHARED, memId, 0);
 
   close(memId);
 
@@ -46,11 +45,11 @@ void openSharedMemory(const char* const shmName) {
     exit(1);
   }
 
-  cout << static_cast<char *>(memory) << endl;
+  cout << static_cast<char*>(memory) << endl;
   munmap(memory, SIZE);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
   assert(argc == 3);
 
   string_view command(argv[1]);

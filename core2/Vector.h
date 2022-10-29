@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 template <typename T, typename Allocator = std::allocator<T>> class Vector {
 private:
@@ -11,7 +11,7 @@ private:
 
   using AllocatorTrait = std::allocator_traits<Allocator>;
 
-  T *data;
+  T* data;
   size_t capacity = MIN_CAPACITY;
   size_t size = 0;
 
@@ -19,12 +19,12 @@ private:
     if (size == capacity) {
       capacity *= 2;
 
-      T *newMemory = allocator.allocate(capacity);
+      T* newMemory = allocator.allocate(capacity);
       for (size_t i = 0; i < size; ++i) {
         if constexpr (std::is_copy_assignable_v<T>) {
           newMemory[i] = data[i];
         } else {
-          newMemory[i] = core::move(data[i]);
+          newMemory[i] = core2::move(data[i]);
         }
       }
 
@@ -39,13 +39,13 @@ private:
 
   void tryShrink() {
     if (size * 4 == capacity && capacity > MIN_CAPACITY) {
-      T *newMemory = allocator.allocate(capacity / 2);
+      T* newMemory = allocator.allocate(capacity / 2);
 
       for (size_t i = 0; i < size; ++i) {
         if constexpr (std::is_copy_assignable_v<T>) {
           newMemory[i] = data[i];
         } else {
-          newMemory[i] = core::move(data[i]);
+          newMemory[i] = core2::move(data[i]);
         }
       }
 
@@ -63,26 +63,26 @@ private:
 public:
   explicit Vector() { data = allocator.allocate(capacity); }
 
-  void pushBack(const T &value) {
+  void pushBack(const T& value) {
     tryExpand();
 
     data[size++] = value;
   }
 
-  void pushBack(T &&value) {
+  void pushBack(T&& value) {
     tryExpand();
 
     data[size++] = std::move(value);
   }
 
-  template <typename... Args> void emplaceBack(Args &&...args) {
+  template <typename... Args> void emplaceBack(Args&&... args) {
     tryExpand();
 
     AllocatorTrait::construct(allocator, &data[size++],
                               std::forward<Args>(args)...);
   }
 
-  T &operator[](size_t index) {
+  T& operator[](size_t index) {
     assert(index < size);
     return data[index];
   }
@@ -108,4 +108,4 @@ public:
   }
 };
 
-} // namespace core
+} // namespace core2

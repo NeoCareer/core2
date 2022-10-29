@@ -1,9 +1,9 @@
 #pragma once
 
-#include "lib/All.h"
-#include "lib/Utility.h"
+#include "core2/STL.h"
+#include "core2/Utility.h"
 
-namespace core {
+namespace core2 {
 
 class String {
 public:
@@ -15,21 +15,21 @@ public:
 private:
   std::allocator<char> allocator;
 
-  CharType *data;
+  CharType* data;
   size_t capacity = MIN_CAPACITY;
   size_t length = 0;
 
 public:
   explicit String() { data = allocator.allocate(MIN_CAPACITY); }
 
-  explicit String(const char *s) {
+  explicit String(const char* s) {
     length = strnlen(s, MAX_CAPACITY);
-    capacity = std::max(MIN_CAPACITY, core::nextPowerOf2(length));
+    capacity = std::max(MIN_CAPACITY, core2::nextPowerOf2(length));
     data = allocator.allocate(capacity);
     memcpy(data, s, length);
   }
 
-  CharType *getData() const { return data; }
+  CharType* getData() const { return data; }
 
   size_t getLength() const { return length; }
 };
@@ -40,16 +40,16 @@ private:
 
   using CharType = String::CharType;
 
-  const CharType *data;
+  const CharType* data;
   size_t length;
 
 public:
-  explicit StringRef(const String &s) {
+  explicit StringRef(const String& s) {
     data = s.getData();
     length = s.getLength();
   }
 
-  explicit StringRef(char *s) {
+  explicit StringRef(char* s) {
     data = s;
     length = strnlen(data, String::MAX_CAPACITY);
 
@@ -59,4 +59,4 @@ public:
   const CharType operator[](const size_t index) { return data[index]; }
 };
 
-} // namespace core
+} // namespace core2

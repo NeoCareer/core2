@@ -1,6 +1,7 @@
 #pragma once
 
 #include <array>
+#include <assert.h>
 #include <bit>
 #include <chrono>
 #include <cmath>
@@ -28,5 +29,3 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <functional>
-#include <assert.h>

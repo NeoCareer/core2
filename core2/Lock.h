@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 class SpinLock {
 private:
@@ -12,7 +12,6 @@ public:
   SpinLock() : flag(false) {}
 
   void lock() {
-    bool temporary = false;
     while (flag.test_and_set())
       ;
   }
@@ -20,4 +19,4 @@ public:
   void unlock() { flag.clear(); }
 };
 
-} // namespace core
+} // namespace core2

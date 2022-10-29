@@ -1,0 +1,9 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+
+cc_library(
+    name = "core2",
+    hdrs = glob(["core2/**/*.h"]),
+    visibility = [
+        "//visibility:public",
+    ],
+)

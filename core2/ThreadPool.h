@@ -1,9 +1,9 @@
 #pragma once
 
-#include "lib/All.h"
-#include "lib/Utility.h"
+#include "core2/STL.h"
+#include "core2/Utility.h"
 
-namespace core {
+namespace core2 {
 
 class ThreadPool {
 private:
@@ -31,7 +31,7 @@ public:
             return;
           }
 
-          func = core::move(taskQueue.front());
+          func = core2::move(taskQueue.front());
           taskQueue.pop();
         }
 
@@ -52,7 +52,7 @@ public:
 
     readyToContinue.notify_all();
 
-    for (std::thread &thread : threads) {
+    for (std::thread& thread : threads) {
       if (thread.joinable()) {
         thread.join();
       }
@@ -60,7 +60,7 @@ public:
   }
 
   template <typename Fn, typename... Args>
-  auto addTask(Fn &&func, Args &&...args) {
+  auto addTask(Fn&& func, Args&&... args) {
     using ReturnType = std::result_of_t<Fn(Args...)>;
 
     auto taskWrapper = std::make_shared<std::packaged_task<ReturnType()>>(
@@ -78,4 +78,4 @@ public:
   }
 };
 
-} // namespace core
+} // namespace core2

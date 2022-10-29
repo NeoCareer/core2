@@ -1,8 +1,8 @@
 #pragma once
 
-#include "lib/All.h"
+#include "core2/STL.h"
 
-namespace core {
+namespace core2 {
 
 template <typename Key, typename Value, typename Hash = std::hash<Key>>
 class HashMap {
@@ -17,7 +17,7 @@ private:
 
   static constexpr const size_t MIN_SIZE = 32;
 
-  size_t hashKey(const Key &key) const {
+  size_t hashKey(const Key& key) const {
     return hash(key) % bucketLists.size();
   }
 
@@ -41,16 +41,16 @@ public:
   explicit HashMap() : bucketLists(MIN_SIZE) {}
 
   template <typename Key_, typename Value_>
-  void insert(Key_ &&key, Value_ &&value) {
+  void insert(Key_&& key, Value_&& value) {
     tryExpand();
 
     size_t index = hashKey(key);
 
-    std::list<typename ElementListType::iterator> &bucketList =
+    std::list<typename ElementListType::iterator>& bucketList =
         bucketLists[index];
 
     // If already exist in map, simply update value
-    for (const auto &elementIterator : bucketList) {
+    for (const auto& elementIterator : bucketList) {
       if (elementIterator->first == key) {
         elementIterator->second = std::forward<Value_>(value);
         return;
@@ -63,14 +63,14 @@ public:
     bucketList.emplace_front(elements.begin());
   };
 
-  Value &get(const Key &key) {
+  Value& get(const Key& key) {
     size_t index = hashKey(key);
 
-    std::list<typename ElementListType::iterator> &bucketList =
+    std::list<typename ElementListType::iterator>& bucketList =
         bucketLists[index];
 
     // If already exist in map, simply update value
-    for (const auto &elementIterator : bucketList) {
+    for (const auto& elementIterator : bucketList) {
       if (elementIterator->first == key) {
         return elementIterator->second;
       }
@@ -86,4 +86,4 @@ public:
   auto end() { return elements.end(); }
 };
 
-} // namespace core
+} // namespace core2
