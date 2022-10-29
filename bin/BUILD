@@ -47,3 +47,11 @@ cc_binary(
         "//lib:corelib",
     ],
 )
+
+cc_binary(
+    name = "stack",
+    srcs = ["stack.cc"],
+    deps = [
+        "//lib:corelib",
+    ],
+)

@@ -17,6 +17,8 @@ int main() {
   ThreadPool threadPool(8);
   vector<future<size_t>> futures;
 
+  std::atomic<unsigned> a;
+
   millsecondDuration();
 
   auto task = [](size_t index) { return compute(index); };

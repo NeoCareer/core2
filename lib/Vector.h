@@ -21,7 +21,11 @@ private:
 
       T *newMemory = allocator.allocate(capacity);
       for (size_t i = 0; i < size; ++i) {
-        newMemory[i] = data[i];
+        if constexpr (std::is_copy_assignable_v<T>) {
+          newMemory[i] = data[i];
+        } else {
+          newMemory[i] = core::move(data[i]);
+        }
       }
 
       for (size_t i = 0; i < size; ++i) {
@@ -38,7 +42,11 @@ private:
       T *newMemory = allocator.allocate(capacity / 2);
 
       for (size_t i = 0; i < size; ++i) {
-        newMemory[i] = data[i];
+        if constexpr (std::is_copy_assignable_v<T>) {
+          newMemory[i] = data[i];
+        } else {
+          newMemory[i] = core::move(data[i]);
+        }
       }
 
       for (size_t i = 0; i < size; ++i) {
@@ -70,7 +78,7 @@ public:
   template <typename... Args> void emplaceBack(Args &&...args) {
     tryExpand();
 
-  AllocatorTrait::construct(allocator, &data[size++],
+    AllocatorTrait::construct(allocator, &data[size++],
                               std::forward<Args>(args)...);
   }
 

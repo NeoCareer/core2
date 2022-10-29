@@ -5,9 +5,12 @@ cc_library(
     hdrs = [
         "All.h",
         "Async.h",
+        "Fifo.h",
         "HashMap.h",
         "Lib.h",
+        "Lock.h",
         "ReaderWriterLock.h",
+        "Stack.h",
         "String.h",
         "ThreadPool.h",
         "Utility.h",
