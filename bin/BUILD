@@ -55,3 +55,12 @@ cc_binary(
         "//:core2",
     ],
 )
+
+cc_binary(
+    name = "dev",
+    srcs = ["dev.cc"],
+    deps = [
+        "//:core2",
+        "@com_google_absl//absl/strings:str_format",
+    ],
+)

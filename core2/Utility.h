@@ -43,4 +43,6 @@ constexpr inline IntegralType nextPowerOf2(IntegralType integral) {
 
 using byte_t = unsigned char;
 
+struct DefaultConstructTag {};
+
 } // namespace core2
