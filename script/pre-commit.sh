@@ -45,10 +45,10 @@ format_type() {
 
 for file in $(git diff-index --cached --diff-filter=d --name-only HEAD); do
 	format_type ${file}
-	filepath=$ROOT/${file}
 	type=$?
+	filepath=$ROOT/${file}
 	if [[ $type -eq 1 ]]; then
-		# Format c code
+		# Format C/C++ code
 		clang-format -i -style=file $filepath
 	fi
 	if [[ $type -eq 2 ]]; then

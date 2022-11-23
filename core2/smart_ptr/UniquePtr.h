@@ -6,8 +6,7 @@
 
 namespace core2 {
 
-template <typename T>
-struct DefaultDeleter {
+template <typename T> struct DefaultDeleter {
 public:
   DefaultDeleter() = default;
   DefaultDeleter(const DefaultDeleter&) noexcept {}
