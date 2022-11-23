@@ -57,8 +57,8 @@ cc_binary(
 )
 
 cc_binary(
-    name = "dev",
-    srcs = ["dev.cc"],
+    name = "play",
+    srcs = ["play.cc"],
     deps = [
         "//:core2",
         "@com_google_absl//absl/strings:str_format",

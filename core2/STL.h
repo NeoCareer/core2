@@ -16,11 +16,13 @@
 #include <map>
 #include <math.h>
 #include <mutex>
+#include <optional>
 #include <queue>
 #include <random>
 #include <set>
 #include <shared_mutex>
 #include <stdexcept>
+#include <string.h>
 #include <sys/mman.h>
 #include <sys/time.h>
 #include <thread>
