@@ -61,3 +61,15 @@ for file in $(git diff-index --cached --diff-filter=d --name-only HEAD); do
 
 	git add $filepath
 done
+
+# Running all tests
+echo "Running all tests"
+
+bazel test //test:all
+
+if [[ $? -ne 0 ]]; then
+	echo "\n\033[0;31mFix all test failures before commit\033[0m"
+	exit 1
+fi
+
+echo "\n\033[32mSuccessfully created the commit!\033[0m"
