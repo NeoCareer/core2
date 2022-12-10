@@ -34,14 +34,12 @@ template <typename T> inline T&& forward(std::remove_reference_t<T>& value) {
 
 template <typename IntegralType = size_t>
 constexpr inline IntegralType nextPowerOf2(IntegralType integral) {
-  if (integral & (integral - 1) == 0) {
+  if ((integral & (integral - 1)) == 0) {
     return integral;
   } else {
     return 0x1 << (sizeof(IntegralType) - std::__countl_zero(integral));
   }
 }
-
-using byte_t = unsigned char;
 
 struct DefaultConstructTag {};
 

@@ -27,3 +27,12 @@ cc_test(
         "@com_google_googletest//:gtest_main",
     ],
 )
+
+cc_test(
+    name = "TradingAllocatorTest",
+    srcs = ["TradingAllocatorTest.cc"],
+    deps = [
+        "//:core2",
+        "@com_google_googletest//:gtest_main",
+    ],
+)

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "core2/Memory.h"
 #include "core2/Utility.h"
+#include "core2/trait/Memory.h"
 
 namespace core2 {
 

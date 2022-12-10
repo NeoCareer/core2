@@ -1,7 +1,7 @@
 #pragma once
 
+#include "core2/Bit.h"
 #include "core2/STL.h"
-#include "core2/Utility.h"
 
 namespace core2 {
 

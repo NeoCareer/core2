@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include "core2/Memory.h"
+#include "core2/trait/Memory.h"
 
 namespace core2 {
 
