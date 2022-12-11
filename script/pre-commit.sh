@@ -65,7 +65,7 @@ done
 # Running all tests
 echo "Running all tests"
 
-bazel test //test:all
+bazel test //test/...
 
 if [[ $? -ne 0 ]]; then
 	echo "\n\033[0;31mFix all test failures before commit\033[0m"

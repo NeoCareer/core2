@@ -1,10 +1,12 @@
 #pragma once
 
+#include "core2/Bit.h"
+#include "core2/Log.h"
 #include "core2/STL.h"
 #include "core2/Stack.h"
 #include "core2/String.h"
 #include "core2/Utility.h"
-#include "core2/allocator/TradingAllocator/TradingAllocator.h"
+#include "core2/allocator/bit_allocator/Allocator.h"
 #include "core2/async/Async.h"
 #include "core2/async/Lock.h"
 #include "core2/async/ReaderWriterLock.h"

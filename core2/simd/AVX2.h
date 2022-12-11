@@ -7,7 +7,7 @@ namespace core2 {
 namespace AVX2 {
 
 using u256 = __m256i;
-using u512 = u256[2];
+using u512 = u256*;
 
 #define U256_FULL_MASK _mm256_set1_epi64x(-1ll)
 #define U256_ZERO _mm256_setzero_si256()
