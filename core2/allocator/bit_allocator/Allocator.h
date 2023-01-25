@@ -9,7 +9,7 @@
 #include <unistd.h>
 
 #include "core2/Bit.h"
-#include "core2/Trait.h"
+#include "core2/TypeTrait.h"
 #include "core2/allocator/bit_allocator/Arena.h"
 #include "core2/allocator/bit_allocator/Chunk.h"
 #include "core2/allocator/bit_allocator/Utility.h"

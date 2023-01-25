@@ -29,7 +29,7 @@ void createSharedMemory(const char* const shmName) {
 }
 
 void openSharedMemory(const char* const shmName) {
-  int memId = shm_open(shmName, O_RDONLY);
+  int memId = shm_open(shmName, O_RDONLY, S_IRUSR | S_IWUSR);
 
   if (memId == -1) {
     perror("shm_open");

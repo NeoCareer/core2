@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core2/Math.h"
 #include "core2/STL.h"
 #include "core2/Utility.h"
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "core2/TypeTrait.h"
 #include "core2/Utility.h"
 #include "core2/trait/Memory.h"
 
