@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-namespace core2 {
+namespace core2::Time {
 
 using namespace std::chrono;
 
@@ -22,4 +22,4 @@ float millsecondDuration() {
   return millsecondDuration;
 }
 
-} // namespace core2
+} // namespace core2::Time

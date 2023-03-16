@@ -1,7 +1,9 @@
 #include "core2/Core2.h"
+#include "core2/Time.h"
 
 using namespace std;
 using namespace core2;
+using namespace core2::Time;
 
 constexpr const unsigned SIZE = 1 << 20;
 
