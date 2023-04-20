@@ -13,7 +13,7 @@ long long millsecondSinceEpoch() {
   return millsecond;
 }
 
-float millsecondDuration() {
+float secondDuration() {
   static long long previousTime = 0;
 
   float millsecondDuration =
