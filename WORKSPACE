@@ -4,8 +4,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "com_google_googletest",
-    strip_prefix = "googletest-609281088cfefc76f9d0ce82e1ff6c30cc3591e5",
-    urls = ["https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip"],
+    sha256 = "983a7f2f4cc2a4d75d94ee06300c46a657291fba965e355d11ab3b6965a7b0e5",
+    strip_prefix = "googletest-b796f7d44681514f58a683a3a71ff17c94edb0c1",
+    urls = ["https://github.com/google/googletest/archive/b796f7d44681514f58a683a3a71ff17c94edb0c1.zip"],
 )
 
 http_archive(
@@ -24,14 +25,15 @@ bazel_skylib_workspace()
 http_archive(
     name = "com_google_absl",
     strip_prefix = "abseil-cpp-a69b0ae5cdba53a45617afc408618a3e1ac244de",
+    sha256 = "d091c4da2c1d51f52e7d37fb4a6c6e8be3cc4f5ddf9f1de50754be2f6c992818",
     urls = ["https://github.com/abseil/abseil-cpp/archive/a69b0ae5cdba53a45617afc408618a3e1ac244de.zip"],
 )
 
-benchmark_version = "1.6.1"
+benchmark_version = "1.7.1"
 
 http_archive(
     name = "com_github_google_benchmark",
-    sha256 = "6132883bc8c9b0df5375b16ab520fac1a85dc9e4cf5be59480448ece74b278d4",
+    sha256 = "6430e4092653380d9dc4ccb45a1e2dc9259d581f4866dc0759713126056bc1d7",
     strip_prefix = "benchmark-%s" % benchmark_version,
     urls = ["https://github.com/google/benchmark/archive/refs/tags/v%s.tar.gz" % benchmark_version],
 )
